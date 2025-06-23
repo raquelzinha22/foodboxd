@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { MaterialIcons } from '@expo/vector-icons';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 // Adicionando um tipo para as chaves do cardápio semanal
@@ -176,7 +175,11 @@ const Tela23: React.FC<Props> = ({ navigation }) => {
                       alimentoIndex === refeicao.alimentos.length - 1 && styles.foodItemLast
                     ]}
                   >
-                    <MaterialIcons name="restaurant" size={24} color="#FFA500" style={styles.foodIcon} />
+                    <Image
+                      source={require("../assets/food-icon.png")}
+                      style={styles.foodIcon}
+                      resizeMode="contain"
+                    />
                     <Text style={styles.foodText}>{alimento}</Text>
                   </View>
                 ))}

@@ -3,15 +3,11 @@ import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StackNavigationProp } from '@react-navigation/stack';
+import { styles } from "./styles/styles";
+import type { IRootStackParamList } from "../../hook/rootStack";
 
-type RootStackParamList = {
-  Tela1: undefined;
-  Tela5: undefined;
-  Tela6: undefined;
-  Tela18: undefined;
-};
 
-type Tela5NavigationProp = StackNavigationProp<RootStackParamList, 'Tela5'>;
+type Tela5NavigationProp = StackNavigationProp<IRootStackParamList, 'Tela5'>;
 
 type Props = {
   navigation: Tela5NavigationProp;
@@ -27,7 +23,7 @@ const Tela5: React.FC<Props> = ({ navigation }) => {
     if (userType === 'usuario') {
       navigation.navigate('Tela18');
     } else {
-      navigation.navigate('Tela6');
+      navigation.navigate('HomeManager');
     }
   };
 
@@ -63,78 +59,7 @@ const Tela5: React.FC<Props> = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    paddingHorizontal: 24,
-    justifyContent: 'center',
-  },
-  backButton: {
-    position: 'absolute',
-    top: 50,
-    left: 20,
-    zIndex: 2,
-  },
-  title: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 8,
-    marginTop: 40,
-  },
-  subtitle: {
-    fontSize: 14,
-    color: '#888',
-    textAlign: 'center',
-    marginBottom: 32,
-  },
-  profileContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginBottom: 32,
-    gap: 16,
-  },
-  profileBox: {
-    flex: 1,
-    alignItems: 'center',
-    paddingVertical: 24,
-    borderWidth: 1.5,
-    borderColor: '#EEE',
-    borderRadius: 10,
-    backgroundColor: '#fff',
-    marginHorizontal: 4,
-    elevation: 2,
-  },
-  profileBoxActive: {
-    borderColor: '#F97316',
-    backgroundColor: '#FFF7ED',
-    elevation: 4,
-    shadowColor: '#F97316',
-  },
-  profileText: {
-    marginTop: 8,
-    fontSize: 16,
-    color: '#222',
-    fontWeight: 'bold',
-  },
-  profileTextActive: {
-    color: '#F97316',
-  },
-  continueButton: {
-    backgroundColor: '#F97316',
-    paddingVertical: 16,
-    borderRadius: 8,
-    alignItems: 'center',
-    marginTop: 8,
-    marginHorizontal: 4,
-  },
-  continueButtonText: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-});
+
 
 export default Tela5;
 

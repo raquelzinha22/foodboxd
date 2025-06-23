@@ -6,7 +6,7 @@ import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
 import { styles } from "./styles/styles";
 import { AntDesign } from "@expo/vector-icons";
 
-type LoginScreenNavigationProp = StackNavigationProp<IRootStackParamList, 'Tela1'>;
+type LoginScreenNavigationProp = StackNavigationProp<IRootStackParamList>;
 
 interface ILogin {
   navigation: LoginScreenNavigationProp;
@@ -33,7 +33,7 @@ export default function Login({ navigation }: ILogin) {
       return;
     }
     await AsyncStorage.setItem("savedEmail", email);
-    navigation.navigate("Tela18");
+    navigation.navigate("PainelGestor");
   };
 
   return (

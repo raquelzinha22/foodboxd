@@ -4,7 +4,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 
 type RootStackParamList = {
   Tela1: undefined;
-  Tela5: undefined;
+  Welcome: undefined;
 };
 
 type Screen1NavigationProp = StackNavigationProp<RootStackParamList, 'Tela1'>;
@@ -16,7 +16,7 @@ type Props = {
 const Tela1: React.FC<Props> = ({ navigation }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigation.navigate('Tela5'); 
+      navigation.navigate('Welcome'); 
     }, 1000);
 
     return () => clearTimeout(timer);

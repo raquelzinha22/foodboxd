@@ -7,21 +7,21 @@ import { styles } from "./styles/styles";
 import type { IRootStackParamList } from "../../hook/rootStack";
 
 
-type Tela5NavigationProp = StackNavigationProp<IRootStackParamList, 'Tela5'>;
+type WelcomeNavigationProp = StackNavigationProp<IRootStackParamList>;
 
 type Props = {
-  navigation: Tela5NavigationProp;
+  navigation: WelcomeNavigationProp;
 };
 
 type UserType = 'usuario' | 'gestor';
 
-const Tela5: React.FC<Props> = ({ navigation }) => {
+const Welcome: React.FC<Props> = ({ navigation }) => {
   const [userType, setUserType] = useState<UserType>('usuario');
 
   const handleContinue = async () => {
     await AsyncStorage.setItem("userType", userType);
     if (userType === 'usuario') {
-      navigation.navigate('Tela18');
+      navigation.navigate('PainelGestor');
     } else {
       navigation.navigate('HomeManager');
     }
@@ -61,6 +61,6 @@ const Tela5: React.FC<Props> = ({ navigation }) => {
 
 
 
-export default Tela5;
+export default Welcome;
 
 

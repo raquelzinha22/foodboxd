@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-nati
 import { StackNavigationProp } from '@react-navigation/stack';
 import { AntDesign } from "@expo/vector-icons";
 import Svg, { Path, G, Text as SvgText } from 'react-native-svg';
+import type { IRootStackParamList } from "../hook/rootStack";
 
 const days = ["Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira"];
 
@@ -71,12 +72,8 @@ const menuData: Record<string, { meal: string; nutrients: { x: string; y: number
   ]
 };
 
-type RootStackParamList = {
-  Tela18: undefined;
-};
-
 type Props = {
-  navigation: StackNavigationProp<RootStackParamList>;
+  navigation: StackNavigationProp<IRootStackParamList>;
 };
 
 const PieChart = ({ data, size = 200 }: { data: { x: string; y: number }[], size?: number }) => {
@@ -150,7 +147,7 @@ const Tela21: React.FC<Props> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate('Tela18')}>
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate('PainelGestor')}>
         <AntDesign name="arrowleft" size={24} color="black" />
       </TouchableOpacity>
 

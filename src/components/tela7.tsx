@@ -4,7 +4,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 
 type RootStackParamList = {
-  Tela5: undefined;
+  Welcome: undefined;
   Tela6: undefined;
   Tela7: { email: string } | undefined;
   Tela8: undefined;
@@ -48,7 +48,7 @@ const Tela7: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={() => (navigation as any).navigate('Tela6')}>
+      <TouchableOpacity style={styles.backButton} onPress={() => (navigation as any).navigate('Welcome')}>
         <AntDesign name="arrowleft" size={24} color="#222" />
       </TouchableOpacity>
       <Text style={styles.title}>E-mail de verificação</Text>

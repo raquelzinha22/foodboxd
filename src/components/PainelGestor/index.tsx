@@ -3,26 +3,16 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 import { StackNavigationProp } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import type { IRootStackParamList } from '../../hook/rootStack';
 
-type RootStackParamList = {
-  Tela2: undefined;
-  Tela3: undefined;
-  Tela5: undefined;
-  Tela19: undefined;
-  Tela21: undefined;
-  Tela22: undefined;
-  Tela20: undefined;
-  Tela18: undefined;
-  Tela25: undefined;
-};
 
 type Props = {
-  navigation: StackNavigationProp<RootStackParamList>;
+  navigation: StackNavigationProp<IRootStackParamList>;
 };
 
 type UserType = 'usuario' | 'gestor';
 
-const Tela18: React.FC<Props> = ({ navigation }) => {
+const PainelGestor: React.FC<Props> = ({ navigation }) => {
   const [selected, setSelected] = useState<string | null>(null);
   const [userType, setUserType] = useState<UserType>('usuario');
   const [userName, setUserName] = useState<string>('');
@@ -44,7 +34,7 @@ const Tela18: React.FC<Props> = ({ navigation }) => {
 
   // Opções para o usuário comum (sem perfil)
   const userOptions = [
-    { id: 'feedback', label: 'Feedback', icon: 'rate-review' as const, screen: 'Tela25' as const },
+    { id: 'feedback', label: 'Feedback', icon: 'rate-review' as const, screen: 'Feedback' as const },
     { id: 'valor', label: 'Valor nutricional', icon: 'bar-chart' as const, screen: 'Tela21' as const },
     { id: 'cardapio', label: 'Cardápio semanal', icon: 'restaurant-menu' as const, screen: 'Tela20' as const }
   ];
@@ -52,7 +42,7 @@ const Tela18: React.FC<Props> = ({ navigation }) => {
   // Opções para gestor (mantém perfil)
   const gestorOptions = [
     { id: 'perfil', label: 'Perfil do Gestor', icon: 'person' as const, screen: 'Tela22' as const },
-    { id: 'relatorios', label: 'Relatórios', icon: 'assessment' as const, screen: 'Tela19' as const },
+    { id: 'relatorios', label: 'Relatórios', icon: 'assessment' as const, screen: 'Feedback' as const },
     { id: 'cardapio', label: 'Gerenciar Cardápio', icon: 'restaurant-menu' as const, screen: 'Tela20' as const },
     { id: 'usuarios', label: 'Gerenciar Usuários', icon: 'people' as const, screen: 'Tela21' as const }
   ];
@@ -62,7 +52,7 @@ const Tela18: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.container}>
       {/* Botão de voltar */}
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate('Tela5')}>
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate('Welcome')}>
         <AntDesign name="arrowleft" size={28} color="#222" />
       </TouchableOpacity>
       <Text style={styles.title}>
@@ -166,4 +156,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Tela18;
+export default PainelGestor;

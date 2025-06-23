@@ -3,15 +3,10 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from "reac
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AntDesign } from "@expo/vector-icons";
 import { StackNavigationProp } from '@react-navigation/stack';
+import { styles } from "./styles/styles"; // Adjust the import path as necessary
+import type { IRootStackParamList } from "../../hook/rootStack";
 
-type RootStackParamList = {
-  Tela3: undefined;
-  Tela4: undefined;
-  Tela5: undefined;
-  Tela18: undefined;
-};
-
-type Tela3NavigationProp = StackNavigationProp<RootStackParamList, 'Tela3'>;
+type Tela3NavigationProp = StackNavigationProp<IRootStackParamList, 'Tela3'>;
 
 type Props = {
   navigation: Tela3NavigationProp;
@@ -47,10 +42,10 @@ const Tela22: React.FC<Props> = ({ navigation }) =>  {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate('Tela18')}>
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate('PainelGestor')}>
         <AntDesign name="arrowleft" size={24} color="black" />
       </TouchableOpacity>
-      <Image source={require('../assets/tela3.png')} style={styles.profileImage} />
+      <Image source={require('../../assets/tela3.png')} style={styles.profileImage} />
       <Text style={styles.label}>Nome</Text>
       <TextInput style={styles.input} value={name} onChangeText={setName} />
 
@@ -70,14 +65,6 @@ const Tela22: React.FC<Props> = ({ navigation }) =>  {
   );
 };
 
-const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, justifyContent: "center" },
-  backButton: { position: "absolute", top: 50, left: 20 },
-  profileImage: { width: 100, height: 100, borderRadius: 50, alignSelf: "center", marginBottom: 20 },
-  label: { fontSize: 14, fontWeight: "bold", marginTop: 10 },
-  input: { backgroundColor: "#F5F5F5", padding: 10, borderRadius: 5, marginTop: 5 },
-  saveButton: { backgroundColor: "orange", padding: 15, borderRadius: 5, alignItems: "center", marginTop: 20 },
-  saveButtonText: { color: "white", fontWeight: "bold" },
-});
+
 
 export default Tela22;

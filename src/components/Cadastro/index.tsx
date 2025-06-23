@@ -15,23 +15,22 @@ const CreateManager: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   const handleRegister = async () => {
-    setLoading(true);
-    try {
-      const user = await registerUser(name, email, password);
-      console.log("Usuário criado:", user.uid);
-      setLoading(false);
-      (navigation as any).navigate('Tela7', { email });
-    } catch (error) {
-      setLoading(false);
-      console.error("Erro ao registrar:", error);
-      const message = error instanceof Error ? error.message : "Erro desconhecido";
-      Alert.alert("Erro no Registro", message);
-    }
-  };
+  setLoading(true);
+  const result = await registerUser(name, email, password);
+  setLoading(false);
+
+  if (result.success) {
+    console.log("Usuário criado:", result.data.uid);
+    Alert.alert("Sucesso", result.message);
+    (navigation as any).navigate('Tela7', { email });
+  } else {
+    Alert.alert("Erro no Registro", result.message);
+  }
+};
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={() => (navigation as any).navigate('Tela5')}>
+      <TouchableOpacity style={styles.backButton} onPress={() => (navigation as any).navigate('Welcome')}>
         <AntDesign name="arrowleft" size={24} color="#222" />
       </TouchableOpacity>
 

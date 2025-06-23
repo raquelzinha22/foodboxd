@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView, Image } from 'rea
 import { MaterialIcons } from '@expo/vector-icons';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { AntDesign } from "@expo/vector-icons";
+import type { IRootStackParamList } from '../hook/rootStack';
 
 const days = ["Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira"];
 
@@ -39,12 +40,8 @@ const menuData: Record<string, string[]> = {
   ]
 };
 
-type RootStackParamList = {
-  Tela18: undefined;
-};
-
 type Props = {
-  navigation: StackNavigationProp<RootStackParamList>;
+  navigation: StackNavigationProp<IRootStackParamList>;
 };
 
 const Tela20: React.FC<Props> = ({ navigation }) => {
@@ -56,7 +53,7 @@ const Tela20: React.FC<Props> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate('Tela18')}>
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate('PainelGestor')}>
         <AntDesign name="arrowleft" size={24} color="black" />
       </TouchableOpacity>
 

@@ -175,11 +175,6 @@ const Tela23: React.FC<Props> = ({ navigation }) => {
                       alimentoIndex === refeicao.alimentos.length - 1 && styles.foodItemLast
                     ]}
                   >
-                    <Image
-                      source={require("../assets/food-icon.png")}
-                      style={styles.foodIcon}
-                      resizeMode="contain"
-                    />
                     <Text style={styles.foodText}>{alimento}</Text>
                   </View>
                 ))}

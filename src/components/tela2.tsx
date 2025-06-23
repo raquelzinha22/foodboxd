@@ -5,7 +5,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 type RootStackParamList = {
   Tela2: undefined;
   Tela3: undefined;
-  Tela5: undefined;
+  Welcome: undefined;
 };
 
 type Tela2NavigationProp = StackNavigationProp<RootStackParamList, 'Tela2'>;
@@ -36,7 +36,7 @@ const Tela2: React.FC<Props> = ({ navigation }) =>  {
         <Text style={styles.continuarTexto}>Continue</Text>
       </TouchableOpacity>
 
-     <TouchableOpacity style={styles.entrar} onPress={() => navigation.navigate('Tela5')}>
+     <TouchableOpacity style={styles.entrar} onPress={() => navigation.navigate('Welcome')}>
         <Text style={styles.entrarTexto}>Entrar</Text>
       </TouchableOpacity>
     </View>

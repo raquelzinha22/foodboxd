@@ -6,6 +6,7 @@ export type IRootStackParamList = {
   Welcome: undefined;
   CreateManager: undefined; // Cadastro
   Tela7: { email: string } | undefined; // Esqueci a senha, por exemplo
+  Tela8: undefined; // Tela de sucesso após verificação
   Tela18: undefined; // Tela principal após login
   Login: undefined;
   HomeManager: undefined;
@@ -15,4 +16,6 @@ export type IRootStackParamList = {
   Tela21: undefined; // Valor nutricional
   Tela22: undefined; // Perfil do gestor
   Tela23: undefined; // Envio de avaliação
+  Tela24: undefined; // Tela adicional
+  EditarCardapioDia: undefined; // Edição do cardápio do dia para gestor
 };

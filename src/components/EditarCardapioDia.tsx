@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, TextInput } from 'react-native';
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 import { StackNavigationProp } from '@react-navigation/stack';
-import type { IRootStackParamList } from '../../hook/rootStack';
+import { IRootStackParamList } from '../hook/rootStack';
 
 type Props = {
   navigation: StackNavigationProp<IRootStackParamList>;

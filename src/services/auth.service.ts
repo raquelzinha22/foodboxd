@@ -1,12 +1,14 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebaseConfig";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import app from "../../firebaseConfig";
 
 interface RegisterResponse {
   success: boolean;
   message: string;
   data?: any;
 }
+
+const auth = getAuth(app);
 
 export async function registerUser(name: string, email: string, password: string): Promise<RegisterResponse> {
   try {

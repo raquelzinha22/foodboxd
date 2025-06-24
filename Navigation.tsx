@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import type { IRootStackParamList } from './src/hook/rootStack';
 
 
 import Tela1 from './src/components/tela1';
@@ -21,9 +22,10 @@ import Tela24 from './src/components/tela24';
 import Login from './src/components/Login/';
 import Tela23 from './src/components/tela23';
 import EditarCardapioDia from './src/components/EditarCardapioDia';
+import PainelUsuario from './src/components/PainelUsuario';
 // ...
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<IRootStackParamList>();
 
 const Navigation = () => {
   return (
@@ -37,6 +39,7 @@ const Navigation = () => {
         <Stack.Screen name="CreateManager" component={CreateManager} />
         <Stack.Screen name="Tela7" component={Tela7} />
         <Stack.Screen name="Tela8" component={Tela8} />
+        <Stack.Screen name="Tela18" component={PainelUsuario} />
         <Stack.Screen name="HomeManager" component={HomeManager} />
         <Stack.Screen name="PainelGestor" component={PainelGestor} />
         <Stack.Screen name="Feedback" component={Feedback} />

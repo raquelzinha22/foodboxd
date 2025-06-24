@@ -21,9 +21,9 @@ const Welcome: React.FC<Props> = ({ navigation }) => {
   const handleContinue = async () => {
     await AsyncStorage.setItem("userType", userType);
     if (userType === 'usuario') {
-      navigation.navigate('PainelGestor');
+      navigation.navigate('Tela20');
     } else {
-      navigation.navigate('HomeManager');
+      navigation.navigate('PainelGestor');
     }
   };
 

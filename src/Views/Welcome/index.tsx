@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StackNavigationProp } from '@react-navigation/stack';
 import { styles } from "./styles/styles";
 import type { IRootStackParamList } from "../../hook/rootStack";
@@ -19,7 +18,6 @@ const Welcome: React.FC<Props> = ({ navigation }) => {
   const [userType, setUserType] = useState<UserType>('usuario');
 
   const handleContinue = async () => {
-    await AsyncStorage.setItem("userType", userType);
     if (userType === 'usuario') {
       navigation.navigate('PainelGestor');
     } else {
@@ -29,9 +27,6 @@ const Welcome: React.FC<Props> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-        <AntDesign name="arrowleft" size={24} color="#222" />
-      </TouchableOpacity>
       <Text style={styles.title}>Bem-vindo!</Text>
       <Text style={styles.subtitle}>Escolha qual a sua forma de entrada.</Text>
 

@@ -3,7 +3,6 @@ import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
 import { styles } from "./styles/styles";
-import { registerUser } from "../../services/auth.service";
 
 
 const CreateManager: React.FC = () => {
@@ -16,16 +15,7 @@ const CreateManager: React.FC = () => {
 
   const handleRegister = async () => {
   setLoading(true);
-  const result = await registerUser(name, email, password);
   setLoading(false);
-
-  if (result.success) {
-    console.log("Usuário criado:", result.data.uid);
-    Alert.alert("Sucesso", result.message);
-    (navigation as any).navigate('Tela7', { email });
-  } else {
-    Alert.alert("Erro no Registro", result.message);
-  }
 };
 
   return (

@@ -20,6 +20,8 @@ import Tela22 from './src/components/PerfilGestor';
 import Tela24 from './src/components/tela24';
 import Login from './src/components/Login/';
 import Tela23 from './src/components/tela23';
+import EditarCardapioDia from './src/components/EditarCardapioDia';
+// ...
 
 const Stack = createStackNavigator();
 
@@ -44,6 +46,7 @@ const Navigation = () => {
         <Stack.Screen name="Tela24" component={Tela24} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name='Tela23' component={Tela23} />
+        <Stack.Screen name="EditarCardapioDia" component={EditarCardapioDia} />
       </Stack.Navigator>
     </NavigationContainer>
   );

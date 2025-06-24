@@ -43,6 +43,7 @@ const Navigation = () => {
         <Stack.Screen name="Tela22" component={Tela22} />
         <Stack.Screen name="Tela24" component={Tela24} />
         <Stack.Screen name="Login" component={Login} />
+        
         <Stack.Screen name='Tela23' component={Tela23} />
       </Stack.Navigator>
     </NavigationContainer>

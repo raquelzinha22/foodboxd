@@ -15,11 +15,10 @@ export default function DiaDaSemana() {
     <View style={styles.dayContainer}>
       <View style={styles.dayHeader}>
           <TextInput
-            value={'teetet'}
             style={styles.inputNome}
           />
           <TouchableOpacity  style={{ flex: 1 }}>
-            <Text style={styles.dayTitle}>'asdasds'</Text>
+            <Text style={styles.dayTitle}>asdasds</Text>
           </TouchableOpacity>
 
         <View style={styles.iconsRight}>

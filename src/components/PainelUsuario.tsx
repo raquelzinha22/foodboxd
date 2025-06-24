@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, type JSX } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -8,7 +8,11 @@ type Props = {
   navigation: StackNavigationProp<IRootStackParamList>;
 };
 
-const menuOptions = [
+const menuOptions: {
+  label: string;
+  icon: JSX.Element;
+  screen: keyof IRootStackParamList;
+}[] = [
   { label: 'Feedback', icon: <FontAwesome5 name="comment-dots" size={32} color="#F97316" />, screen: 'Feedback' },
   { label: 'Valor nutricional', icon: <MaterialIcons name="pie-chart" size={32} color="#F97316" />, screen: 'Tela21' },
   { label: 'Cardápio semanal', icon: <MaterialIcons name="restaurant-menu" size={32} color="#F97316" />, screen: 'Tela20' },
@@ -53,7 +57,6 @@ const styles = StyleSheet.create({
   backButton: {
     marginTop: 10,
     marginBottom: 10,
-    marginLeft: 0,
     width: 40,
   },
   title: {
@@ -73,8 +76,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    gap: 16,
   },
   button: {
     width: '47%',
@@ -110,4 +111,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PainelUsuario; 
+export default PainelUsuario;

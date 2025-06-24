@@ -7,7 +7,7 @@ const Tela8: React.FC = () => {
   const navigation = useNavigation();
 
   const handleStart = () => {
-    (navigation as any).navigate('Tela18'); // Navega para o painel principal
+    (navigation as any).navigate('Tela18');
   };
 
   return (

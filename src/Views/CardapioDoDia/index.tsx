@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 import { StackNavigationProp } from '@react-navigation/stack';
 import type { IRootStackParamList } from '../../hook/rootStack';
 import MealItem from '../../components/Mealtem';
+import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore';
+import { db } from '../../config/firebase';
 
 
 type Props = {
@@ -11,51 +13,85 @@ type Props = {
 };
 
 interface Meal {
-  id: number;
+  id: string;
   title: string;
   value: string;
   editing: boolean;
 }
 
-const initialMeals: Meal[] = [
-  { id: 1, title: 'Café da manhã', value: 'Pão, Café, Nescau, Ovos', editing: false },
-  { id: 2, title: 'Lanche da manhã', value: 'Salgado folheado e Suco de Laranja', editing: false },
-  { id: 3, title: 'Almoço', value: 'Strogonoff de frango, Feijão, Salada, Arroz, Macarrão, Suco de laranja e Farofa', editing: false },
-  { id: 4, title: 'Lanche da tarde', value: 'Bolo de Laranja e Suco de Abacaxi', editing: false },
-];
-
 const EditarCardapioDia: React.FC<Props> = ({ navigation }) => {
-  const [meals, setMeals] = useState<Meal[]>(initialMeals);
-  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [meals, setMeals] = useState<Meal[]>([]);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  const handleEdit = (id: number) => {
+  // 🔁 Buscar refeições ao iniciar
+  useEffect(() => {
+    const fetchMeals = async () => {
+      const mealCollection = collection(db, 'meals');
+      const snapshot = await getDocs(mealCollection);
+      const data = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data(),
+        editing: false,
+      })) as Meal[];
+
+      setMeals(data);
+    };
+
+    fetchMeals();
+  }, []);
+
+  const handleEdit = (id: string) => {
     setMeals(meals.map(m => m.id === id ? { ...m, editing: true } : m));
     setSelectedId(id);
   };
 
-  const handleChange = (id: number, text: string) => {
+  const handleChange = (id: string, text: string) => {
     setMeals(meals.map(m => m.id === id ? { ...m, value: text } : m));
   };
 
-  const handleSave = (id: number) => {
+  const handleSave = async (id: string) => {
+    const meal = meals.find(m => m.id === id);
+    if (!meal) return;
+
+    await updateDoc(doc(db, 'meals', id), {
+      title: meal.title,
+      value: meal.value,
+    });
+
     setMeals(meals.map(m => m.id === id ? { ...m, editing: false } : m));
     setSelectedId(null);
   };
 
-  const handleAdd = () => {
-    const newId = meals.length > 0 ? Math.max(...meals.map(m => m.id)) + 1 : 1;
-    setMeals([...meals, { id: newId, title: 'Nova refeição', value: '', editing: true }]);
-    setSelectedId(newId);
+  const handleAdd = async () => {
+    const docRef = await addDoc(collection(db, 'meals'), {
+      title: 'Nova refeição',
+      value: '',
+    });
+
+    const newMeal: Meal = {
+      id: docRef.id,
+      title: 'Nova refeição',
+      value: '',
+      editing: true,
+    };
+
+    setMeals([...meals, newMeal]);
+    setSelectedId(docRef.id);
   };
 
-  const handleDelete = (id: number) => {
+  const handleDelete = async (id: string) => {
+    await deleteDoc(doc(db, 'meals', id));
     setMeals(meals.filter(m => m.id !== id));
     if (selectedId === id) setSelectedId(null);
   };
 
+  const handleChangeTitle = (id: string, text: string) => {
+  setMeals(meals.map(m => m.id === id ? { ...m, title: text } : m));
+};
+
+
   return (
     <View style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.navigate('PainelGestor')}>
           <AntDesign name="arrowleft" size={28} color="#222" />
@@ -71,6 +107,7 @@ const EditarCardapioDia: React.FC<Props> = ({ navigation }) => {
             onEdit={handleEdit}
             onDelete={handleDelete}
             onChangeValue={handleChange}
+            onChangeTitle={handleChangeTitle}
             onSave={handleSave}
           />
         ))}
@@ -82,6 +119,7 @@ const EditarCardapioDia: React.FC<Props> = ({ navigation }) => {
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#f5f5f5' },

@@ -6,7 +6,6 @@ import {
   Animated,
   View,
   Text,
-  StyleSheet,
   Dimensions,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -87,21 +86,28 @@ const SidebarDrawer: React.FC<Props> = ({ visible, onClose, navigation }) => {
           <Text style={styles.drawerTitle}>PORTAL DO GESTOR</Text>
         </View>
         {menuOptions.map((option) => (
-          <TouchableWithoutFeedback
-            key={option.label}
-            onPress={() => {
-              onClose();
-              if (option.label === 'Cardápio do dia') {
-                navigation.navigate('EditarCardapioDia');
-              }
-            }}
-          >
-            <View style={styles.drawerItem}>
-              <MaterialIcons name={option.icon} size={22} color="#F97316" style={{ marginRight: 12 }} />
-              <Text style={styles.drawerItemText}>{option.label}</Text>
-            </View>
-          </TouchableWithoutFeedback>
-        ))}
+  <TouchableWithoutFeedback
+    key={option.label}
+    onPress={() => {
+      onClose();
+      switch (option.label) {
+        case 'Cardápio do dia':
+          navigation.navigate('EditarCardapioDia');
+          break;
+        case 'Cardápio semanal':
+          navigation.navigate('CardapioDaSemana');
+          break;
+        // Adicione outros casos se quiser tratar mais menus depois
+      }
+    }}
+  >
+    <View style={styles.drawerItem}>
+      <MaterialIcons name={option.icon} size={22} color="#F97316" style={{ marginRight: 12 }} />
+      <Text style={styles.drawerItemText}>{option.label}</Text>
+    </View>
+  </TouchableWithoutFeedback>
+))}
+
       </Animated.View>
     </Modal>
   );

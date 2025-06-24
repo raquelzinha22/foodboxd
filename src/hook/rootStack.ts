@@ -7,6 +7,12 @@ export type IRootStackParamList = {
   EditarCardapioDia: undefined;
   Feedback: undefined;
   PerfilGestor: undefined;
+  CardapioDaSemana: undefined
+   EditarDia: {
+    index?: number;
+    nomeInicial?: string;
+    onSave: (nome: string, index?: number) => void;
+  };
 
   // Telas temporárias
   Tela1: undefined;

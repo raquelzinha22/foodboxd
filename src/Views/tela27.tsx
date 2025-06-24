@@ -37,7 +37,6 @@ const Tela27: React.FC = () => {
         onChangeText={setComment}
         placeholder="Digite seu comentário aqui..."
         multiline
-        autoFocus={true}
         textAlignVertical="top"
       />
 

@@ -11,16 +11,17 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 interface MealItemProps {
   meal: {
-    id: number;
+    id: string;
     title: string;
     value: string;
     editing: boolean;
   };
   isSelected: boolean;
-  onEdit: (id: number) => void;
-  onDelete: (id: number) => void;
-  onChangeValue: (id: number, text: string) => void;
-  onSave: (id: number) => void;
+  onEdit: (id: string) => void;
+  onDelete: (id: string) => void;
+  onChangeValue: (id: string, text: string) => void;
+  onChangeTitle: (id: string, text: string) => void; // recebe essa prop para alterar título
+  onSave: (id: string) => void;
 }
 
 const MealItem: React.FC<MealItemProps> = ({
@@ -29,6 +30,7 @@ const MealItem: React.FC<MealItemProps> = ({
   onEdit,
   onDelete,
   onChangeValue,
+  onChangeTitle,
   onSave,
 }) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -57,7 +59,17 @@ const MealItem: React.FC<MealItemProps> = ({
   return (
     <View style={isSelected ? styles.mealBlockSelected : styles.mealBlock}>
       <View style={styles.mealHeader}>
-        <Text style={styles.mealTitle}>{meal.title}:</Text>
+        {meal.editing ? (
+          <TextInput
+            style={[styles.mealInput, { flex: 0.8, marginRight: 8 }]}
+            value={meal.title}
+            onChangeText={text => onChangeTitle(meal.id, text)} // chama direto a prop
+            placeholder="Título da refeição"
+          />
+        ) : (
+          <Text style={styles.mealTitle}>{meal.title}:</Text>
+        )}
+
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <TouchableOpacity onPress={() => onEdit(meal.id)}>
             <MaterialIcons name="edit" size={20} color="#F97316" />
@@ -74,7 +86,6 @@ const MealItem: React.FC<MealItemProps> = ({
             value={meal.value}
             onChangeText={text => onChangeValue(meal.id, text)}
             placeholder="Digite o(s) elemento(s) do item"
-            autoFocus
           />
           <TouchableOpacity onPress={() => openModal('save')} style={{ marginLeft: 8 }}>
             <MaterialIcons name="check" size={24} color="#F97316" />

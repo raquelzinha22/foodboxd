@@ -12,7 +12,6 @@ import PainelGestor from './src/Views/PainelGestor';
 import EditarCardapioDia from './src/Views/CardapioDoDia';
 import Feedback from './src/Views/Feedback';
 import PerfilGestor from './src/Views/PerfilGestor';
-
 // Telas genéricas temporárias ou placeholders
 import Tela1 from './src/Views/tela1';
 import Tela2 from './src/Views/tela2';
@@ -26,6 +25,8 @@ import Tela22 from './src/Views/PerfilGestor'; // já importado como PerfilGesto
 import Tela23 from './src/Views/tela23';
 import Tela24 from './src/Views/tela24';
 import type { IRootStackParamList } from './src/hook/rootStack';
+import CardapioDaSemana from './src/Views/CardapioDaSemana';
+import EditarDia from './src/Views/EditarDia';
 
 const Stack = createStackNavigator<IRootStackParamList>();
 
@@ -42,6 +43,8 @@ const Navigation = () => {
         <Stack.Screen name="EditarCardapioDia" component={EditarCardapioDia} />
         <Stack.Screen name="Feedback" component={Feedback} />
         <Stack.Screen name="PerfilGestor" component={PerfilGestor} />
+        <Stack.Screen name="CardapioDaSemana" component={CardapioDaSemana} />
+        <Stack.Screen name="EditarDia" component={EditarDia} /> 
 
         {/* Telas temporárias ou em desenvolvimento */}
         <Stack.Screen name="Tela1" component={Tela1} />

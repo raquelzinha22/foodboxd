@@ -4,9 +4,17 @@ import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from '@react-navigation/native';
 import { styles } from "./styles/styles";
 
+// Importa Firestore
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../../config/firebase"; 
+import type { IRootStackParamList } from "../../../hook/rootStack";
+import type { StackNavigationProp } from "@react-navigation/stack";
 
-const CreateManager: React.FC = () => {
-  const navigation = useNavigation();
+interface Props {
+  navigation: StackNavigationProp<IRootStackParamList>;
+}
+
+const CreateManager: React.FC<Props> = ({navigation}) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,9 +22,36 @@ const CreateManager: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   const handleRegister = async () => {
-  setLoading(true);
-  setLoading(false);
-};
+    if (!name.trim() || !email.trim() || !password.trim()) {
+      Alert.alert("Erro", "Por favor, preencha todos os campos.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      // Cria um novo documento na coleção 'managers'
+      await addDoc(collection(db, "managers"), {
+        name: name.trim(),
+        email: email.trim().toLowerCase(),
+        password, // Atenção: armazenar senha em texto puro não é seguro! Ideal usar autenticação Firebase Auth
+        createdAt: new Date(),
+      });
+
+      Alert.alert("Sucesso", "Gestor cadastrado com sucesso!");
+      // Limpa campos
+      setName("");
+      setEmail("");
+      setPassword("");
+      // Redireciona para outra tela, se quiser
+      navigation.navigate("Login");
+    } catch (error) {
+      console.error("Erro ao cadastrar gestor:", error);
+      Alert.alert("Erro", "Não foi possível cadastrar gestor. Tente novamente.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <View style={styles.container}>

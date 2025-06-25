@@ -1,26 +1,31 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, TextInput, KeyboardAvoidingView, Platform } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  TextInput,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
+import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import type { IRootStackParamList } from "../hook/rootStack";
 
-type RootStackParamList = {
-  Tela19: { comment: string };
-};
-
-type NavigationProp = StackNavigationProp<RootStackParamList>;
+type NavigationProp = StackNavigationProp<IRootStackParamList>;
 
 const Tela27: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
 
   const handleSaveComment = () => {
     // Navega de volta para a Tela19 e passa o comentário como parâmetro
-    navigation.navigate('Tela19', { comment });
+    navigation.navigate("Tela19", { comment });
   };
 
   return (
-    <KeyboardAvoidingView 
+    <KeyboardAvoidingView
       style={styles.container}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
@@ -50,20 +55,20 @@ const Tela27: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingTop: 50,
     paddingHorizontal: 20,
     paddingBottom: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#E2E8F0',
+    borderBottomColor: "#E2E8F0",
   },
   headerTitle: {
     fontSize: 20,
-    fontWeight: '600',
+    fontWeight: "600",
     marginLeft: 15,
   },
   input: {
@@ -72,17 +77,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   saveButton: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 40,
     right: 30,
-    backgroundColor: '#F97316',
+    backgroundColor: "#F97316",
     width: 60,
     height: 60,
     borderRadius: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     elevation: 4,
   },
 });
 
-export default Tela27; 
+export default Tela27;

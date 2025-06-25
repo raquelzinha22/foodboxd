@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { AntDesign, MaterialIcons } from "@expo/vector-icons";
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { styles } from "./styles/styles";
-import type { IRootStackParamList } from "../../hook/rootStack";
-
+import type { IRootStackParamList } from '../../hook/rootStack';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { styles } from './styles/styles';
 
 type WelcomeNavigationProp = StackNavigationProp<IRootStackParamList>;
 
@@ -14,21 +14,51 @@ type Props = {
 
 type UserType = 'usuario' | 'gestor';
 
+type Meal = {
+  id: string;
+  title: string;
+  value: string;
+};
+
 const Welcome: React.FC<Props> = ({ navigation }) => {
   const [userType, setUserType] = useState<UserType>('usuario');
+  const [meals, setMeals] = useState<Meal[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const handleContinue = async () => {
+  const db = getFirestore();
+
+  useEffect(() => {
+    const fetchMeals = async () => {
+      try {
+        const snapshot = await getDocs(collection(db, 'meals'));
+        const mealData: Meal[] = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          title: doc.data().title,
+          value: doc.data().value,
+        }));
+        setMeals(mealData);
+      } catch (error) {
+        console.error('Erro ao buscar refeições:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMeals();
+  }, []);
+
+  const handleContinue = () => {
     if (userType === 'usuario') {
-      navigation.navigate('Tela20');
+      navigation.navigate('MenuUsuario')
     } else {
-      navigation.navigate('PainelGestor');
+      navigation.navigate('Login');
     }
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Bem-vindo!</Text>
-      <Text style={styles.subtitle}>Escolha qual a sua forma de entrada.</Text>
+      <Text style={styles.subtitle}>Escolha como você quer entrar:</Text>
 
       <View style={styles.profileContainer}>
         <TouchableOpacity
@@ -46,16 +76,23 @@ const Welcome: React.FC<Props> = ({ navigation }) => {
           <Text style={[styles.profileText, userType === 'gestor' && styles.profileTextActive]}>Gestor</Text>
         </TouchableOpacity>
       </View>
-
       <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
-        <Text style={styles.continueButtonText}>Continue</Text>
+        <Text style={styles.continueButtonText}>Continuar</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-
+const styleProduto = StyleSheet.create({
+  option: {
+    backgroundColor: '#eee',
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 10,
+  },
+  selected: {
+    backgroundColor: '#F97316',
+  },
+});
 
 export default Welcome;
-
-

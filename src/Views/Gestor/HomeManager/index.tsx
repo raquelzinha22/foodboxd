@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { IRootStackParamList } from "../../hook/rootStack";
+import { IRootStackParamList } from "../../../hook/rootStack";
 import type { StackNavigationProp } from "@react-navigation/stack";
 import { AntDesign } from "@expo/vector-icons";
 import { styles } from "./style/style";

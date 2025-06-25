@@ -63,7 +63,7 @@ const MealItem: React.FC<MealItemProps> = ({
           <TextInput
             style={[styles.mealInput, { flex: 0.8, marginRight: 8 }]}
             value={meal.title}
-            onChangeText={text => onChangeTitle(meal.id, text)} // chama direto a prop
+            onChangeText={text => onChangeTitle(meal.id, text)}
             placeholder="Título da refeição"
           />
         ) : (
@@ -80,14 +80,15 @@ const MealItem: React.FC<MealItemProps> = ({
         </View>
       </View>
       {meal.editing ? (
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <View>
           <TextInput
-            style={styles.mealInput}
+            style={[styles.mealInput, { minHeight: 80, textAlignVertical: 'top' }]}
+            multiline={true}
             value={meal.value}
             onChangeText={text => onChangeValue(meal.id, text)}
             placeholder="Digite o(s) elemento(s) do item"
           />
-          <TouchableOpacity onPress={() => openModal('save')} style={{ marginLeft: 8 }}>
+          <TouchableOpacity onPress={() => openModal('save')} style={{ marginTop: 8, alignSelf: 'flex-end' }}>
             <MaterialIcons name="check" size={24} color="#F97316" />
           </TouchableOpacity>
         </View>

@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 import { StackNavigationProp } from '@react-navigation/stack';
-import type { IRootStackParamList } from '../../hook/rootStack';
-import MealItem from '../../components/Mealtem';
+import type { IRootStackParamList } from '../../../hook/rootStack';
+import MealItem from '../../../components/Mealtem';
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore';
-import { db } from '../../config/firebase';
+import { db } from '../../../config/firebase';
 
 
 type Props = {
@@ -96,7 +96,7 @@ const EditarCardapioDia: React.FC<Props> = ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.navigate('PainelGestor')}>
           <AntDesign name="arrowleft" size={28} color="#222" />
         </TouchableOpacity>
-        <Text style={styles.title}>Refeições de hoje:</Text>
+        <Text style={styles.title}>Refeições de hoje</Text>
       </View>
       <ScrollView contentContainerStyle={styles.content}>
         {meals.map(meal => (

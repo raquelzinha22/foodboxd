@@ -6,15 +6,14 @@ import type { IRootStackParamList } from './src/hook/rootStack';
 
 // Views principais
 import Welcome from './src/Views/Welcome';
-import Login from './src/Views/Login';
-import CreateManager from './src/Views/Cadastro';
-import HomeManager from './src/Views/HomeManager';
-import PainelGestor from './src/Views/PainelGestor';
-import EditarCardapioDia from './src/Views/CardapioDoDia';
-import Feedback from './src/Views/Feedback';
-import PerfilGestor from './src/Views/PerfilGestor';
-import CardapioDaSemana from './src/Views/CardapioDaSemana';
-import EditarDia from './src/Views/EditarDia';
+import Login from './src/Views/Gestor/Login';
+import CreateManager from './src/Views/Gestor/Cadastro';
+import HomeManager from './src/Views/Gestor/HomeManager';
+import PainelGestor from './src/Views/Gestor/PainelGestor';
+import EditarCardapioDia from './src/Views/Gestor/CardapioDoDia';
+import Feedback from './src/Views/Usuario/Feedback';
+import PerfilGestor from './src/Views/Gestor/PerfilGestor';
+import CardapioDaSemana from './src/Views/Gestor/CardapioDaSemana';
 import PainelUsuario from './src/components/PainelUsuario';
 
 // Telas temporárias
@@ -24,10 +23,14 @@ import Tela3 from './src/Views/tela3';
 import Tela4 from './src/Views/tela4';
 import Tela7 from './src/Views/tela7';
 import Tela8 from './src/Views/tela8';
-import Tela20 from './src/Views/tela20';
-import Tela21 from './src/Views/tela21';
+import Tela20 from './src/Views/Usuario/CardapioSemanaUser';
 import Tela23 from './src/Views/tela23';
 import Tela24 from './src/Views/tela24';
+import MenuUsuario from './src/Views/Usuario/UsuárioMenu';
+import FeedbackGestor from './src/Views/Gestor/Feedback';
+import ValorNutricional from './src/Views/Gestor/ValorNutricional';
+import ValorNutricionalUsuario from './src/Views/Usuario/ValorNutricionalUser';
+import GraficoAvaliacoes from './src/Views/Gestor/Gráficos';
 
 const Stack = createStackNavigator<IRootStackParamList>();
 
@@ -45,8 +48,13 @@ const Navigation = () => {
         <Stack.Screen name="Feedback" component={Feedback} />
         <Stack.Screen name="PerfilGestor" component={PerfilGestor} />
         <Stack.Screen name="CardapioDaSemana" component={CardapioDaSemana} />
-        <Stack.Screen name="EditarDia" component={EditarDia} />
         <Stack.Screen name="Tela18" component={PainelUsuario} />
+        <Stack.Screen name="MenuUsuario" component={MenuUsuario} />
+        <Stack.Screen name="FeedbackGestor" component={FeedbackGestor} />
+        <Stack.Screen name="ValorNutricionalUser" component={ValorNutricionalUsuario} />
+        <Stack.Screen name="ValorNutricional" component={ValorNutricional} />
+        <Stack.Screen name="GraficoAvaliacoes" component={GraficoAvaliacoes} />
+
 
         {/* Telas temporárias */}
         <Stack.Screen name="Tela1" component={Tela1} />
@@ -56,7 +64,6 @@ const Navigation = () => {
         <Stack.Screen name="Tela7" component={Tela7} />
         <Stack.Screen name="Tela8" component={Tela8} />
         <Stack.Screen name="Tela20" component={Tela20} />
-        <Stack.Screen name="Tela21" component={Tela21} />
         <Stack.Screen name="Tela23" component={Tela23} />
         <Stack.Screen name="Tela24" component={Tela24} />
       </Stack.Navigator>

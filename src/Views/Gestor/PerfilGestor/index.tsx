@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from "reac
 import { AntDesign } from "@expo/vector-icons";
 import { StackNavigationProp } from '@react-navigation/stack';
 import { styles } from "./styles/styles"; // Adjust the import path as necessary
-import type { IRootStackParamList } from "../../hook/rootStack";
+import type { IRootStackParamList } from "../../../hook/rootStack";
 
 type Tela3NavigationProp = StackNavigationProp<IRootStackParamList, 'Tela3'>;
 
@@ -22,7 +22,7 @@ const Tela22: React.FC<Props> = ({ navigation }) =>  {
       <TouchableOpacity style={styles.backButton} onPress={() => navigation.navigate('PainelGestor')}>
         <AntDesign name="arrowleft" size={24} color="black" />
       </TouchableOpacity>
-      <Image source={require('../../assets/tela3.png')} style={styles.profileImage} />
+      <Image source={require('../../../assets/tela3.png')} style={styles.profileImage} />
       <Text style={styles.label}>Nome</Text>
       <TextInput style={styles.input} value={name} onChangeText={setName} />
 

@@ -7,6 +7,7 @@ import {
   View,
   Text,
   Dimensions,
+  TouchableOpacity,
 } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import type { StackNavigationProp } from '@react-navigation/stack';
@@ -20,10 +21,9 @@ type Props = {
 };
 
 const menuOptions: { label: string; icon: React.ComponentProps<typeof MaterialIcons>['name'] }[] = [
-  { label: 'Visão geral', icon: 'dashboard' },
+   { label: 'Visão geral', icon: 'dashboard' },
   { label: 'Avaliações', icon: 'star' },
   { label: 'Gráficos', icon: 'insert-chart' },
-  { label: 'Usuários', icon: 'people' },
   { label: 'Cardápio do dia', icon: 'today' },
   { label: 'Cardápio semanal', icon: 'date-range' },
   { label: 'Valor Nutricional', icon: 'restaurant' },
@@ -86,26 +86,42 @@ const SidebarDrawer: React.FC<Props> = ({ visible, onClose, navigation }) => {
           <Text style={styles.drawerTitle}>PORTAL DO GESTOR</Text>
         </View>
         {menuOptions.map((option) => (
-  <TouchableWithoutFeedback
-    key={option.label}
-    onPress={() => {
-      onClose();
-      switch (option.label) {
-        case 'Cardápio do dia':
-          navigation.navigate('EditarCardapioDia');
-          break;
-        case 'Cardápio semanal':
-          navigation.navigate('CardapioDaSemana');
-          break;
-        // Adicione outros casos se quiser tratar mais menus depois
-      }
-    }}
-  >
-    <View style={styles.drawerItem}>
-      <MaterialIcons name={option.icon} size={22} color="#F97316" style={{ marginRight: 12 }} />
-      <Text style={styles.drawerItemText}>{option.label}</Text>
-    </View>
-  </TouchableWithoutFeedback>
+  <TouchableOpacity
+  key={option.label}
+  onPress={() => {
+    onClose();
+    switch (option.label) {
+      case 'PainelGestor':
+        navigation.navigate('PainelGestor');
+        break;
+      case 'Avaliações':
+        navigation.navigate('FeedbackGestor');
+        break;
+      case 'Cardápio do dia':
+        navigation.navigate('EditarCardapioDia');
+        break;
+      case 'Cardápio semanal':
+        navigation.navigate('CardapioDaSemana');
+        break;
+        case 'Gráficos': 
+        navigation.navigate('GraficoAvaliacoes');
+        break;
+        case 'Valor Nutricional':
+        navigation.navigate('ValorNutricional');
+        break;
+      // outros casos se precisar
+    }
+  }}
+  style={styles.drawerItem}
+>
+  <MaterialIcons
+    name={option.icon}
+    size={22}
+    color="#F97316"
+    style={{ marginRight: 12 }}
+  />
+  <Text style={styles.drawerItemText}>{option.label}</Text>
+</TouchableOpacity>
 ))}
 
       </Animated.View>

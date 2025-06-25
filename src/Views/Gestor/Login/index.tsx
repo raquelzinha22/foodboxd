@@ -1,9 +1,13 @@
 import type { StackNavigationProp } from "@react-navigation/stack";
-import type { IRootStackParamList } from "../../hook/rootStack";
-import { useEffect, useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
+import type { IRootStackParamList } from "../../../hook/rootStack";
+import { useState } from "react";
+import { View, Text, TextInput, TouchableOpacity, Alert, ActivityIndicator } from "react-native";
 import { styles } from "./styles/styles";
 import { AntDesign } from "@expo/vector-icons";
+
+// Firebase Firestore
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../../../config/firebase"; // Ajuste o caminho conforme seu projeto
 
 type LoginScreenNavigationProp = StackNavigationProp<IRootStackParamList>;
 
@@ -15,9 +19,45 @@ export default function Login({ navigation }: ILogin) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
-    navigation.navigate("PainelGestor");
+    if (!email.trim() || !password) {
+      Alert.alert("Erro", "Preencha email e senha.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      // Consulta no Firestore por email
+      const q = query(collection(db, "managers"), where("email", "==", email.trim().toLowerCase()));
+      const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.empty) {
+        Alert.alert("Erro", "Usuário não encontrado.");
+        setLoading(false);
+        return;
+      }
+
+      // Deve ter só 1 usuário com o email, pega o primeiro
+      const userDoc = querySnapshot.docs[0];
+      const userData = userDoc.data();
+
+      if (userData.password !== password) {
+        Alert.alert("Erro", "Senha incorreta.");
+        setLoading(false);
+        return;
+      }
+
+      // Login OK
+      navigation.navigate("PainelGestor");
+
+    } catch (error) {
+      console.error("Erro no login:", error);
+      Alert.alert("Erro", "Erro ao tentar fazer login. Tente novamente.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -38,6 +78,7 @@ export default function Login({ navigation }: ILogin) {
           onChangeText={setEmail}
           autoComplete="email"
           keyboardType="email-address"
+          autoCapitalize="none"
         />
       </View>
 
@@ -50,6 +91,7 @@ export default function Login({ navigation }: ILogin) {
             secureTextEntry={!showPassword}
             value={password}
             onChangeText={setPassword}
+            autoCapitalize="none"
           />
           <TouchableOpacity
             style={styles.eyeIcon}
@@ -68,8 +110,16 @@ export default function Login({ navigation }: ILogin) {
         <Text style={styles.forgotPassword}>Esqueceu sua senha?</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-        <Text style={styles.loginText}>Login</Text>
+      <TouchableOpacity
+        style={styles.loginButton}
+        onPress={handleLogin}
+        disabled={loading}
+      >
+        {loading ? (
+          <ActivityIndicator color="#fff" />
+        ) : (
+          <Text style={styles.loginText}>Login</Text>
+        )}
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => navigation.navigate('CreateManager')}>

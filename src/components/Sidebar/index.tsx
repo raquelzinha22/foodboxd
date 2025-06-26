@@ -28,6 +28,7 @@ const menuOptions: { label: string; icon: React.ComponentProps<typeof MaterialIc
   { label: 'Cardápio semanal', icon: 'date-range' },
   { label: 'Valor Nutricional', icon: 'restaurant' },
   { label: 'Perfil', icon: 'person' },
+  { label: 'Sair', icon: 'logout' },
 ];
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -109,6 +110,8 @@ const SidebarDrawer: React.FC<Props> = ({ visible, onClose, navigation }) => {
         case 'Valor Nutricional':
         navigation.navigate('ValorNutricional');
         break;
+        case 'Sair': 
+        navigation.navigate('Welcome');
       // outros casos se precisar
     }
   }}

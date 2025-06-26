@@ -1,14 +1,14 @@
-// App.tsx (Corrigido)
 import React from 'react';
-import { Text, View } from 'react-native';
-import Navigation from './Navigation'; // ajuste o caminho se seu Navigation estiver em outra pasta
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Navigation from './Navigation';
 
 export default function App() {
   return (
-    <View style={{ flex: 1 }}>
-      <Navigation />
-    </View>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaProvider>
+        <Navigation />
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }
-
-

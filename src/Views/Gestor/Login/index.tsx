@@ -106,10 +106,6 @@ export default function Login({ navigation }: ILogin) {
         </View>
       </View>
 
-      <TouchableOpacity onPress={() => navigation.navigate('Tela7')}>
-        <Text style={styles.forgotPassword}>Esqueceu sua senha?</Text>
-      </TouchableOpacity>
-
       <TouchableOpacity
         style={styles.loginButton}
         onPress={handleLogin}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList, ActivityIndicator, SafeAreaView, TouchableOpacity } from "react-native";
+import { View, Text, FlatList, ActivityIndicator, TouchableOpacity } from "react-native";
 import {
   collection,
   getDocs,
@@ -72,7 +72,7 @@ const FeedbackGestor: React.FC<Props> = ({navigation}) => {
     : "0.0";
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+    <View style={{ flex: 1, backgroundColor: "#fff" }}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.navigate('PainelGestor')}>
           <AntDesign name="arrowleft" size={28} color="#222" />
@@ -98,7 +98,7 @@ const FeedbackGestor: React.FC<Props> = ({navigation}) => {
           renderItem={({ item }) => <FeedbackCard {...item} />}
         />
       )}
-    </SafeAreaView>
+    </View>
   );
 };
 

@@ -93,7 +93,7 @@ const Tela20: React.FC<Props> = ({ navigation }) => {
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.backButton}
-        onPress={() => navigation.navigate("PainelGestor")}
+        onPress={() => navigation.navigate("MenuUsuario")}
       >
         <AntDesign name="arrowleft" size={24} color="black" />
       </TouchableOpacity>

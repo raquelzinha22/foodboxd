@@ -31,10 +31,6 @@ const initialDias = [
   "Domingo",
 ];
 
-// Habilita animação no Android
-if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
-  UIManager.setLayoutAnimationEnabledExperimental(true);
-}
 
 export default function CardapioDaSemana({ navigation }: any) {
   const [selectedDays, setSelectedDays] = useState<string[]>([]);

@@ -25,7 +25,7 @@ export default function MenuUsuario({ navigation }: Props) {
   const options: MenuOption[] = [
     { id: 'feedback', label: 'Feedback', icon: 'rate-review', screen: 'Feedback' },
     { id: 'valor', label: 'Valor Nutricional', icon: 'bar-chart', screen: 'ValorNutricionalUser' },
-    { id: 'cardapio', label: 'Cardápio Semanal', icon: 'restaurant-menu', screen: 'Tela20' },
+    { id: 'cardapio', label: 'Cardápio Semanal', icon: 'restaurant-menu', screen: 'CardapioSemanaUser' },
   ];
 
   return (
